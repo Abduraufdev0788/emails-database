@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .database import Base, engine
-
+from .routers import mails
 app = FastAPI()
 
 app.add_middleware(
@@ -14,6 +14,10 @@ app.add_middleware(
 
 
 Base.metadata.create_all(engine)
+
+
+
+app.include_router(mails.router)
 
 
 @app.get("/")
